@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <title>Latitude e Longitude</title>
+    <meta charset="utf-8">
+    <style>
+      table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+      }
+      ul,th {
+        padding:5px;
+      }
+      ul {
+        padding-left:20px;
+      }
+      h2 {
+        margin: 5px 0px 10px 0px;
+      }
+      p {
+        margin:5px;
+      }
+    </style>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      var mapid;
+      var marker;
+      function initialize() {
+        var latLng = new google.maps.LatLng(-29.8190716,-53.3763013);
+        var mapProp = {
+          center: latLng,
+          zoom:15,
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        mapid = map;
+        marker = new google.maps.Marker({
+          position: latLng,
+          map:map,
+          draggable:false,
+          visible:false
+        });
+        google.maps.event.addListener(map,"click",function(e){
+          document.getElementById("latitude_dec").value = e.latLng.lat();
+          document.getElementById("longitude_dec").value = e.latLng.lng();
+          document.getElementById("latitude_grad").value = formatLatitude(e.latLng.lat());
+          document.getElementById("longitude_grad").value = formatLongitude(e.latLng.lng());
+          marker.setPosition(e.latLng);
+          if(!marker.getVisible()) {
+            marker.setVisible(true);
+          }
+        });
+      }
+      function formatLatitude(lat) {
+        var degrees;
+        var minutes;
+        var seconds;
+        var hemisphere;
+        if (lat < 0) {
+          hemisphere = 'S';
+        }
+        else {
+          hemisphere = 'N';
+        }
+        abs_lat = Math.abs(lat);
+        degrees = Math.floor(abs_lat);
+        minutes = Math.floor(60*(abs_lat-degrees));
+        seconds = 3600 * (abs_lat-degrees) - 60 * minutes;
+        seconds_rounded = Math.round((seconds*10)/10);
+        return Math.abs(degrees)+'° '+Math.abs(minutes)+'\' '+Math.abs(seconds.toFixed(3))+'\" '+hemisphere;
+      }
+      function formatLongitude(lng) {
+        var degrees;
+        var minutes;
+        var seconds;
+        var hemisphere;
+        if (lng < 0) {
+          hemisphere = 'O';
+        }
+        else {
+          hemisphere = 'L';
+        }
+        abs_lng = Math.abs(lng);
+        degrees = Math.floor(abs_lng);
+        minutes = Math.floor(60*(abs_lng-degrees));
+        seconds = 3600 * (abs_lng-degrees) - 60 * minutes;
+        seconds_rounded = Math.round((seconds*10)/10);
+        return Math.abs(degrees)+'° '+Math.abs(minutes)+'\' '+Math.abs(seconds.toFixed(3))+'\" '+hemisphere;
+
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+      </script>
+  </head>
+  <body>
+    <h2>Latitude e Longitude</h2>
+    <table>
+      <tr>
+        <tr>
+          <th>Graus decimais</th>
+          <th>Grau/minuto/segundo</th>
+        </tr>
+      <td>
+        <ul>
+            <li>Latitude: <input id="latitude_dec" type="input" disabled></input></li>
+            <li style="margin-top:5px;">Longitude: <input id="longitude_dec" type="input" disabled></input></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+            <li>Latitude: <input id="latitude_grad" type="input" disabled></input></li>
+            <li style="margin-top:5px;">Longitude: <input id="longitude_grad" type="input" disabled></input></li>
+        </ul>
+      </td>
+      </tr>
+    </table>
+    <p>Clique no link ao lado e digite os dados de latitude e longitude que você encontrou: <a href="https://docs.google.com/forms/d/1R9k3y-ZhFOsB5N-TDwv4ehRdsDL41-Gc8t1psly9kJY" target="_blank">Formulário</a></p>
+    <a></a>
+    <div id="googleMap" style="width:700px;height:520px;"></div>
+  </body>
+</html>
