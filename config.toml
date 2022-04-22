@@ -1,0 +1,38 @@
+baseURL = 'https://gxovano.github.io/'
+languageCode = 'pt-br'
+DefaultContentLanguage = 'pt-br'
+title = 'gxovano'
+theme = 'diary'
+
+[taxonomies]
+   tag = "tags"
+   category = "categories"
+
+[param]
+enableAutoDarkMode=true
+
+[menu]
+[[menu.main]]
+url = "/categories"
+name = "Categorias"
+weight = 3
+
+[[menu.main]]
+url = "/tags"
+name = "Tags"
+weight = 4
+
+[[menu.main]]
+url = "/posts"
+name = "Arquivo"
+weight = 5
+
+[[menu.main]]
+url = "/sobre"
+name = "Sobre mim"
+weight = 2
+
+[[menu.main]]
+url = "/about"
+name = "About me"
+weight = 1
