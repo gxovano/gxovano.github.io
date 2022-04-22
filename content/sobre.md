@@ -21,5 +21,5 @@ Também de encontro a este reconhecimento, aprendi a valorizar a manutenção de
 * Skills interpessoais: Solicitude, paciencia ("cabeça fria"), respeito a contrariedade e a opiniões diversas.
 
 # Curriculum Vitae
-* [English CV](/static/resume_en.pdf) 
-* [CV em Portugues](/static/resume_ptbr.pdf)
+* [English CV](/resume_en.pdf) 
+* [CV em Portugues](/resume_ptbr.pdf)
